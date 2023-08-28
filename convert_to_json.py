@@ -11,7 +11,12 @@ def csv_to_json(csv_file, json_file):
     with open(csv_file, 'r') as csvfile:
         csvreader = csv.DictReader(csvfile)
         for row in csvreader:
-            data.append(row)
+            genre=row['genres'].split("|")
+            data.append({
+                "id": row['movieId'],
+                "title": row['title'],
+                "genres": genre
+            })
     with open(json_file, 'w') as jsonfile:
         json.dump(data, jsonfile, indent=4)
 
